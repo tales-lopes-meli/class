@@ -99,11 +99,21 @@ func monthConverter(monthNumber int){
 	}
 }
 
+var employees = map[string]int{"Benjamin": 20, "Manuel": 26, "Brenda": 19, "Dario": 44, "Pedro": 30}
+
 // EXERCÍCIO 4
 func findEmployee(name string) {
-	var employees = map[string]int{"Benjamin": 20, "Manuel": 26, "Brenda": 19, "Dario": 44, "Pedro": 30}
-
 	fmt.Printf("%s is %d years old\n", name, employees[name])
+}
+
+func findAge(age int) {
+	amount := 0
+	for _, age := range employees {
+		if age == 21{
+			amount++
+		}
+	}	
+	fmt.Printf("A quantidade de funcionários com %d anos é %d.\n", age, amount)
 }
 
 func main() {
@@ -118,5 +128,9 @@ func main() {
 	fmt.Println()
 
 	findEmployee("Benjamin")
+	findAge(21)
+	employees["Federico"] = 25
+	delete(employees, "Pedro")
+	fmt.Println(employees)
 	fmt.Println()
 }
