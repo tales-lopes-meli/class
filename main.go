@@ -22,38 +22,57 @@ func letter(word string) {
 }
 
 // EXERCICIO 2
-func rent(age int, isEmployee bool, experienceYears float64, wage int) {
 
-	var fees bool = false
-	var approved bool = true
-
+func verifyAge(age int) bool {
 	if age <= 22 {
 		fmt.Println("Desculpa! Empréstimos somente são autorizados a maiores de 22 anos")
-		approved = false
+		return false
 	}
+	return true
+}
+
+func verifyEmployment(isEmployee bool) bool {
 	if !isEmployee {
 		fmt.Println("Desculpa! Empréstimos somente são autorizados a pessoas empregadas")
-		approved = false
+		return false
 	}
+	return true
+}
+
+func verifyExperience(experienceYears float64) bool {
 	if experienceYears <= 1{
 		fmt.Println("Desculpa! Empréstimos somente são autorizados a pessoas com mais de um ano de experiência")
-		approved = false
+		return false
 	}
+	return true
+}
 
-	if !approved {
-		return
-	}
-
+func verifyWage(wage int) bool {
 	if wage <= 100000 {
-		fees = true
+		return true
 	}
+	return false
+}
 
+func verifyFees(fees bool) {
 	if fees {
 		fmt.Println("Parabéns! Seu empréstimo foi aprovado com juros")
 	} else {
 		fmt.Println("Parabéns! Seu empréstimo foi aprovado sem juros")
 	}
-	fmt.Println()
+}
+
+func rent(age int, isEmployee bool, experienceYears float64, wage int) {
+
+	var fees bool = false
+
+	if !verifyAge(age) || !verifyEmployment(isEmployee) || !verifyExperience(experienceYears) {
+		return
+	}
+
+	fees = verifyWage(wage)
+
+	verifyFees(fees)
 }
 
 // EXERCÍCIO 3
@@ -90,10 +109,14 @@ func findEmployee(name string) {
 func main() {
 
 	letter("Tales")
+	fmt.Println()
 
-	rent(23, true, 5, 100000)
+	rent(23, true, 5, 150000)
+	fmt.Println()
 
 	monthConverter(13)
+	fmt.Println()
 
 	findEmployee("Benjamin")
+	fmt.Println()
 }
